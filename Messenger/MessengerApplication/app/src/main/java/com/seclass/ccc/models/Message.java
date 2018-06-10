@@ -1,9 +1,9 @@
 package com.seclass.ccc.models;
 
-import lombok.Data;
-
 import java.util.Date;
 import java.util.List;
+
+import lombok.Data;
 
 /**
  */

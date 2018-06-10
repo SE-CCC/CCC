@@ -6,8 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.seclass.ccc.R;
 import com.seclass.ccc.customviews.RoundedImageView;
 import com.seclass.ccc.models.Chat;
@@ -16,6 +15,9 @@ import com.seclass.ccc.views.ChatFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHolder> {
 

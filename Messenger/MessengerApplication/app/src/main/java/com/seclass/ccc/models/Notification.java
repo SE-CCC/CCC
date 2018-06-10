@@ -7,7 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
-import com.google.firebase.analytics.FirebaseAnalytics;
+
 import com.seclass.ccc.R;
 
 public class Notification {
