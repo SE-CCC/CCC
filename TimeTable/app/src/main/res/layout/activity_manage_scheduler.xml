@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/editID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Input number" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/editShowname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Select name" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/editShowDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="select Date" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/editShowTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="select Time" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/btGet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="get" />
+
+        <Button
+            android:id="@+id/btDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete" />
+
+        <Button
+            android:id="@+id/btDrop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Drop" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

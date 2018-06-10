@@ -10,19 +10,30 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.*;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.seclass.ccc.R;
 import com.seclass.ccc.adapters.ChatListAdapter;
 import com.seclass.ccc.customviews.RecyclerViewItemClickListener;
-import com.seclass.ccc.models.*;
+import com.seclass.ccc.models.Chat;
+import com.seclass.ccc.models.ExitMessage;
+import com.seclass.ccc.models.Message;
+import com.seclass.ccc.models.Notification;
+import com.seclass.ccc.models.User;
 
 import java.util.Date;
 import java.util.Iterator;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ChatFragment extends Fragment {
 
@@ -167,7 +178,6 @@ public class ChatFragment extends Fragment {
                 StringBuffer memberStringBuffer = new StringBuffer();
 
                 /**
-                 *  <추가 반영분>
                  *  방에 한명밖에 없는 경우 방을 사용하지 못하게 처리 합니다.
                  **/
                 if ( memberCount <= 1 ) {
@@ -319,7 +329,6 @@ public class ChatFragment extends Fragment {
                         });
 
                         /**
-                         * <추가 반영분>
                          * 대화방의 타이틀이 변경됨을 알려주어 채팅방의 리스너가 감지하게 하여 방 이름을 업데이트 하게 해야합니다
                          * 방의 제목은 방의 업데이트, 추가되었을때의 리스너가 처리하기때문에 방 제목만 변경 시켜서 변경이 되었음만 알리면 됩니다
                          */

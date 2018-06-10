@@ -7,8 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.seclass.ccc.R;
@@ -19,6 +18,9 @@ import com.seclass.ccc.models.TextMessage;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.MessageViewHolder>{
 

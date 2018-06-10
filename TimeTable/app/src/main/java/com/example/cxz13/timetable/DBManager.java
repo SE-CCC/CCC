@@ -20,8 +20,10 @@ public class DBManager {
     private Context context;
     private ProductDBHelper courseHelper = null;
     private ProductDBHelper scheduleHelper = null;
+    private ProductDBHelper weeklyHelper = null;
     private SQLiteDatabase courseDB = null;
     private SQLiteDatabase scheduleDB = null;
+    private SQLiteDatabase weeklyDB = null;
 
     public SQLiteDatabase getCourseDB() {
         return courseDB;
@@ -29,6 +31,10 @@ public class DBManager {
 
     public SQLiteDatabase getScheduleDB() {
         return scheduleDB;
+    }
+
+    public SQLiteDatabase getWeeklyDB() {
+        return weeklyDB;
     }
 
     public static DBManager getInstance(Context context) {
@@ -44,10 +50,13 @@ public class DBManager {
         this.context = context;
         courseHelper = new ProductDBHelper(context, "testDB.sqlite");
         scheduleHelper = new ProductDBHelper(context, "storeDB.sqlite");
+        weeklyHelper = new ProductDBHelper(context,"weeklyDB.sqlite");
         setDB(context, "testDB.sqlite");
         setDB(context, "storeDB.sqlite");
+        setDB(context, "weeklyDB.sqlite");
         courseDB = courseHelper.getWritableDatabase();
         scheduleDB = scheduleHelper.getWritableDatabase();
+        weeklyDB = weeklyHelper.getWritableDatabase();
     }
 
     public static void setDB(Context ctx, String dbName) {

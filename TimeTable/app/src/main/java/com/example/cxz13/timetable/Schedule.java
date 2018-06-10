@@ -36,11 +36,10 @@ public class Schedule {
         }
     }
 
-    public void addSchedule(String scheduleText, String courseTitle, SQLiteDatabase db) {
+    public void addSchedule(String scheduleText, String courseTitle, SQLiteDatabase db, SQLiteDatabase kdb) {
         int temp;
         courseList.add(courseTitle);
         if ((temp = scheduleText.indexOf("월")) > -1) {
-            ContentValues values = new ContentValues();
             int count = 0;
             temp++;
             int startPoint = (int) scheduleText.charAt(temp) - 48;
@@ -57,14 +56,14 @@ public class Schedule {
             if ((endPoint - startPoint) == 1) {
                 monday[startPoint] = courseTitle;
                 monday[endPoint] = courseTitle;
-                values.put("강의명",courseTitle);
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Monday'",new String[]{courseTitle,String.valueOf(startPoint)});
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Monday'",new String[]{courseTitle,String.valueOf(endPoint)});
-                cursor = db.rawQuery("select 강의명 from schedule where 강의시간 = ? AND 요일 = 'Monday'", new String[]{String.valueOf(startPoint)});
-                cursor.moveToNext();
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Monday'",new String[]{courseTitle,String.valueOf(startPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Monday'",new String[]{courseTitle,String.valueOf(endPoint)});
             } else if (startPoint == endPoint) {
                 monday[startPoint] = courseTitle;
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Monday'",new String[]{courseTitle,String.valueOf(startPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Monday'",new String[]{courseTitle,String.valueOf(startPoint)});
             } else {
                 monday[startPoint] = courseTitle;
                 monday[endPoint - 1] = courseTitle;
@@ -72,6 +71,9 @@ public class Schedule {
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Monday'",new String[]{courseTitle,String.valueOf(startPoint)});
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Monday'",new String[]{courseTitle,String.valueOf(endPoint-1)});
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Monday'",new String[]{courseTitle,String.valueOf(endPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Monday'",new String[]{courseTitle,String.valueOf(startPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Monday'",new String[]{courseTitle,String.valueOf(endPoint-1)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Monday'",new String[]{courseTitle,String.valueOf(endPoint)});
             }
 
 
@@ -97,9 +99,12 @@ public class Schedule {
                 tuesday[endPoint] = courseTitle;
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Tuesday'",new String[]{courseTitle,String.valueOf(startPoint)});
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Tuesday'",new String[]{courseTitle,String.valueOf(endPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Tuesday'",new String[]{courseTitle,String.valueOf(startPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Tuesday'",new String[]{courseTitle,String.valueOf(endPoint)});
             } else if (startPoint == endPoint) {
                 tuesday[startPoint] = courseTitle;
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Tuesday'",new String[]{courseTitle,String.valueOf(startPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Tuesday'",new String[]{courseTitle,String.valueOf(startPoint)});
 
             } else {
                 tuesday[startPoint] = courseTitle;
@@ -108,6 +113,9 @@ public class Schedule {
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Tuesday'",new String[]{courseTitle,String.valueOf(startPoint)});
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Tuesday'",new String[]{courseTitle,String.valueOf(endPoint-1)});
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Tuesday'",new String[]{courseTitle,String.valueOf(endPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Tuesday'",new String[]{courseTitle,String.valueOf(startPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Tuesday'",new String[]{courseTitle,String.valueOf(endPoint-1)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Tuesday'",new String[]{courseTitle,String.valueOf(endPoint)});
             }
         }
 
@@ -130,10 +138,13 @@ public class Schedule {
                 wednesday[endPoint] = courseTitle;
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Wednesday'",new String[]{courseTitle,String.valueOf(startPoint)});
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Wednesday'",new String[]{courseTitle,String.valueOf(endPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Wednesday'",new String[]{courseTitle,String.valueOf(startPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Wednesday'",new String[]{courseTitle,String.valueOf(endPoint)});
 
             } else if (startPoint == endPoint) {
                 wednesday[startPoint] = courseTitle;
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Wednesday'",new String[]{courseTitle,String.valueOf(startPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Wednesday'",new String[]{courseTitle,String.valueOf(startPoint)});
             } else {
                 wednesday[startPoint] = courseTitle;
                 wednesday[endPoint - 1] = courseTitle;
@@ -141,6 +152,9 @@ public class Schedule {
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Wednesday'",new String[]{courseTitle,String.valueOf(startPoint)});
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Wednesday'",new String[]{courseTitle,String.valueOf(endPoint-1)});
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Wednesday'",new String[]{courseTitle,String.valueOf(endPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Wednesday'",new String[]{courseTitle,String.valueOf(startPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Wednesday'",new String[]{courseTitle,String.valueOf(endPoint-1)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Wednesday'",new String[]{courseTitle,String.valueOf(endPoint)});
             }
 
         }
@@ -165,9 +179,12 @@ public class Schedule {
                 thursday[endPoint] = courseTitle;
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Thursday'",new String[]{courseTitle,String.valueOf(startPoint)});
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Thursday'",new String[]{courseTitle,String.valueOf(endPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Thursday'",new String[]{courseTitle,String.valueOf(startPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Thursday'",new String[]{courseTitle,String.valueOf(endPoint)});
             } else if (startPoint == endPoint) {
                 thursday[startPoint] = courseTitle;
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Thursday'",new String[]{courseTitle,String.valueOf(startPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Thursday'",new String[]{courseTitle,String.valueOf(startPoint)});
             } else {
                 thursday[startPoint] = courseTitle;
                 thursday[endPoint - 1] = courseTitle;
@@ -175,6 +192,9 @@ public class Schedule {
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Thursday'",new String[]{courseTitle,String.valueOf(startPoint)});
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Thursday'",new String[]{courseTitle,String.valueOf(endPoint-1)});
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Thursday'",new String[]{courseTitle,String.valueOf(endPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Thursday'",new String[]{courseTitle,String.valueOf(startPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Thursday'",new String[]{courseTitle,String.valueOf(endPoint-1)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Thursday'",new String[]{courseTitle,String.valueOf(endPoint)});
             }
         }
 
@@ -197,9 +217,12 @@ public class Schedule {
                 friday[endPoint] = courseTitle;
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Friday'",new String[]{courseTitle,String.valueOf(startPoint)});
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Friday'",new String[]{courseTitle,String.valueOf(endPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Friday'",new String[]{courseTitle,String.valueOf(startPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Friday'",new String[]{courseTitle,String.valueOf(endPoint)});
             } else if (startPoint == endPoint) {
                 friday[startPoint] = courseTitle;
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Friday'",new String[]{courseTitle,String.valueOf(startPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Friday'",new String[]{courseTitle,String.valueOf(startPoint)});
             } else {
                 friday[startPoint] = courseTitle;
                 friday[endPoint - 1] = courseTitle;
@@ -207,6 +230,9 @@ public class Schedule {
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Friday'",new String[]{courseTitle,String.valueOf(startPoint)});
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Friday'",new String[]{courseTitle,String.valueOf(endPoint-1)});
                 db.execSQL("update 'schedule' set 강의명 = ? where 강의시간 = ? AND 요일 = 'Friday'",new String[]{courseTitle,String.valueOf(endPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Friday'",new String[]{courseTitle,String.valueOf(startPoint)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Friday'",new String[]{courseTitle,String.valueOf(endPoint-1)});
+                kdb.execSQL("update 'weekly' set name = ? where time = ? AND day = 'Friday'",new String[]{courseTitle,String.valueOf(endPoint)});
             }
         }
     }
@@ -353,9 +379,10 @@ public class Schedule {
         }
     }
 
-    public void setting_init (SQLiteDatabase db) {
+    public void setting_init (SQLiteDatabase db, SQLiteDatabase kdb) {
         //String emptystr = "";
         db.execSQL("update 'schedule' set 강의명 = ''");
+        kdb.execSQL("update 'weekly' set name = ''");
     }
 
 }

@@ -6,14 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.bumptech.glide.Glide;
 import com.seclass.ccc.R;
 import com.seclass.ccc.customviews.RoundedImageView;
 import com.seclass.ccc.models.User;
 
 import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.FriendHolder> {
 

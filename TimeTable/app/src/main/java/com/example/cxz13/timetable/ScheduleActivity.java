@@ -28,6 +28,7 @@ public class ScheduleActivity extends AppCompatActivity {
     private AutoResizeTextView friday[] = new AutoResizeTextView[12];
     public static Context mContext;
     public SQLiteDatabase db;
+    public SQLiteDatabase kdb;
 
 
     @Override
@@ -35,6 +36,7 @@ public class ScheduleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
         db = DBManager.getInstance(getApplicationContext()).getScheduleDB();
+        kdb = DBManager.getInstance(getApplicationContext()).getWeeklyDB();
         schedule = new Schedule(db);
         mContext=this.getApplicationContext();
         Toolbar toolbar = findViewById(R.id.my_toolbar);
@@ -52,7 +54,7 @@ public class ScheduleActivity extends AppCompatActivity {
         fab_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                schedule.setting_init(db);
+                schedule.setting_init(db,kdb);
                 Toast.makeText(getApplicationContext(),"삭제되었습니다.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ScheduleActivity.this, ScheduleActivity.class);
                 startActivity(intent);
@@ -128,4 +130,5 @@ public class ScheduleActivity extends AppCompatActivity {
         Intent intent = new Intent(ScheduleActivity.this, MainActivity.class);
         startActivity(intent);
     }
+
 }

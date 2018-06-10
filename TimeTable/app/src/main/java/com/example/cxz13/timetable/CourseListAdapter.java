@@ -27,10 +27,12 @@ public class CourseListAdapter extends BaseAdapter{
     public Schedule schedule;
     public List<String> courseCodeList;
     public SQLiteDatabase db;
+    public SQLiteDatabase kdb;
 
 
     public CourseListAdapter(Context context, List<Course> courseList){
         db = DBManager.getInstance(context).getScheduleDB();
+        kdb = DBManager.getInstance(context).getWeeklyDB();
         this.context = context;
         this.courseList = courseList;
         this.schedule = new Schedule(db);
@@ -86,7 +88,7 @@ public class CourseListAdapter extends BaseAdapter{
                 courseCodeList.add(courseList.get(position).getCourseCode());
                 Log.d("maybeValid","maybeValid");
                 if(validate && alreadyin(courseCodeList,courseCode.toString())) {
-                    schedule.addSchedule(courseList.get(position).getCourseTime(), courseList.get(position).getCourseTitle(),db);
+                    schedule.addSchedule(courseList.get(position).getCourseTime(), courseList.get(position).getCourseTitle(),db,kdb);
                     Toast.makeText(context,"추가되었습니다", Toast.LENGTH_SHORT).show();
                 }
                 else{
