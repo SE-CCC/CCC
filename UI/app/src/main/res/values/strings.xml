@@ -1,0 +1,7 @@
+<resources>
+    <string name="setting">setting</string>
+    <string name="schedule">schedule</string>
+    <string name="messenger">messenger</string>
+    <string name="timetable">TimeTable</string>
+    <string name="app_name">Ui</string>
+</resources>
